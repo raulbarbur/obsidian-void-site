@@ -1,3 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+}
+
+@layer base {
+  @keyframes shine {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(200%); }
+  }
+  .animate-shine {
+    animation: shine 3s infinite;
+  }
+}
