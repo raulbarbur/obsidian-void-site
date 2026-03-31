@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google"; // Importamos las fuentes
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
-// 1. Configuramos la fuente principal (Inter es muy limpia para lectura)
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter", // Creamos una variable CSS
+  variable: "--font-inter",
 });
 
-// 2. Configuramos una fuente secundaria para títulos (Opcional, da mucha personalidad)
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space",
@@ -26,8 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="scroll-smooth">
-      {/* 3. Aplicamos las variables de las fuentes al body */}
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-neutral-950 text-neutral-200 antialiased`}>
+      <body
+        className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-black text-neutral-200 antialiased`}
+      >
+        <Navbar />
         {children}
       </body>
     </html>
