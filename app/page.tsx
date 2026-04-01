@@ -46,7 +46,7 @@ function SolutionCard({ item }: { item: any }) {
         <h4 className={cn("font-bold text-[13px] md:text-sm tracking-tight transition-colors duration-300", isOpen ? "text-violet-200" : "text-neutral-200 group-hover:text-violet-200")}>
           {item.t}
         </h4>
-        <div 
+        <div
           className={cn(
             "grid transition-all duration-300 ease-in-out",
             isOpen ? "grid-rows-[1fr] opacity-100 mt-2" : "grid-rows-[0fr] opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100 md:group-hover:mt-2"
@@ -75,19 +75,19 @@ function IdealSection({ idealPara, noEsPara }: { idealPara: string[]; noEsPara: 
 
   return (
     <section className="py-24 px-6 max-w-6xl mx-auto border-b border-white/5 pb-32 relative z-10 overflow-hidden">
-      
+
       {/* ── MOBILE TABS ── */}
       <div className="flex md:hidden bg-white/5 border border-white/10 rounded-full p-1.5 mb-10 relative shadow-inner">
-        <div 
+        <div
           className={cn("absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-violet-600/70 rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(139,92,246,0.3)]", activeTab === 'ideal' ? "left-1.5" : "left-[calc(50%+4.5px)] bg-neutral-800")}
         />
-        <button 
+        <button
           onClick={() => setActiveTab('ideal')}
           className={cn("flex-1 py-3.5 text-[11px] font-black uppercase tracking-widest rounded-full transition-all duration-300 z-10 italic", activeTab === 'ideal' ? "text-white" : "text-neutral-400")}
         >
           ✓ Ideal para
         </button>
-        <button 
+        <button
           onClick={() => setActiveTab('noes')}
           className={cn("flex-1 py-3.5 text-[11px] font-black uppercase tracking-widest rounded-full transition-all duration-300 z-10 italic", activeTab === 'noes' ? "text-white" : "text-neutral-400")}
         >
@@ -205,7 +205,7 @@ const solutions = [
 
 const idealPara = [
   'Dueños de pymes o emprendimientos que quieren que su negocio crezca sin depender solo de ellos.',
-  'Profesionales que quieren mejorar sus ventas, procesos y presencia digital.',
+  'Profesionales independientes que quieren mejorar sus ventas, procesos y presencia digital.',
   'Negocios que buscan automatizar tareas repetitivas y organizar datos, inventario y leads.',
   'Quienes quieren que su comunicación y página de ventas realmente conviertan.',
 ];
