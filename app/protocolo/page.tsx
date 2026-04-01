@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import DarkBackground from '../components/DarkBackground';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -255,12 +256,11 @@ export default function ProtocolPage() {
 
       {/* ── FOOTER MINI ── */}
       <div className="border-t border-white/5 py-16 text-center relative z-10">
-        <a
-          href="mailto:obsidianvoidstudio@gmail.com"
+        <GmailLink
           className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-neutral-600 hover:text-violet-400 transition-colors italic"
         >
           ¿Preguntas sobre el protocolo? Escribinos →
-        </a>
+        </GmailLink>
       </div>
     </div>
   );

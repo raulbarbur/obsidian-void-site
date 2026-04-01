@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 const links = [
   { href: '/', label: 'Inicio' },
@@ -52,13 +53,12 @@ export default function Navbar() {
         ))}
       </div>
 
-      <a
-        href="mailto:obsidianvoidstudio@gmail.com"
+      <GmailLink
         className="relative group overflow-hidden bg-white text-black px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl"
       >
         <span className="relative z-10 font-bold italic">Solicitar Diagnóstico</span>
         <div className="absolute inset-0 bg-violet-600 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-      </a>
+      </GmailLink>
     </nav>
   );
 }

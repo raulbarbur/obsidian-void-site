@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BarChart3 } from 'lucide-react';
 import DarkBackground from '../components/DarkBackground';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -118,7 +119,12 @@ export default function CasosPage() {
           {/* Right — app mockup preview */}
           <div ref={mockupRef} className="relative group">
             <div className="absolute inset-0 bg-violet-600/20 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            <div className="relative aspect-[4/3] bg-[#07070f] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] group-hover:border-violet-500/40 transition-all duration-700">
+            <a 
+              href="https://abysstracker-guapecanes-demo.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="relative aspect-[4/3] block bg-[#07070f] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] group-hover:border-violet-500/40 transition-all duration-700"
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/dashboard.png"
@@ -130,7 +136,7 @@ export default function CasosPage() {
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-black tracking-[0.5em] text-white/40 whitespace-nowrap italic select-none uppercase group-hover:text-white/80 transition-colors duration-[800ms]">
                 Obsidian Core // ERP Preview
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -158,12 +164,11 @@ export default function CasosPage() {
 
       {/* ── FOOTER MINI ── */}
       <div className="border-t border-white/5 py-16 text-center relative z-10 pb-24">
-        <a
-          href="mailto:obsidianvoidstudio@gmail.com"
+        <GmailLink
           className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-neutral-600 hover:text-violet-400 transition-colors italic"
         >
           ¿Querés ser el próximo caso? Escribinos →
-        </a>
+        </GmailLink>
       </div>
     </div>
   );
