@@ -133,26 +133,26 @@ export default function NosotrosPage() {
         <div ref={origenRef}>
           {/* ── Origen ── */}
           <div className="mb-20">
-            <h2 className="text-2xl md:text-3xl font-black text-white italic uppercase tracking-tight mb-8 border-l-4 border-violet-600 pl-6">
+            <h2 className="text-2xl md:text-3xl font-black text-white italic uppercase tracking-tight mb-8 border-l-4 border-violet-600 pl-4 md:pl-6">
               El Origen
             </h2>
             <div className="pl-0 md:pl-10 space-y-6">
-              <p className="text-neutral-300 text-base leading-relaxed italic font-medium border-l-2 border-violet-500/25 pl-6">
+              <p className="text-neutral-300 text-base leading-relaxed italic font-medium border-l-2 border-violet-500/25 pl-4 md:pl-6">
                 Obsidian Void nació de la convicción de que los negocios pequeños y medianos merecen la misma tecnología de control que las grandes corporaciones —sin la burocracia, sin los costos inflados, sin las soluciones genéricas.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-4 md:pl-6 border-l-2 border-white/5">
                 Fundamos el estudio tras años de ver dueños de comercios operar con cuadernos, hojas de cálculo y memoria humana como únicos sistemas de gestión. La ineficiencia no era por falta de voluntad: era por falta de acceso a ingeniería real.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic border-l-2 border-white/5 pl-6">
+              <p className="text-neutral-500 text-sm leading-relaxed italic border-l-2 border-white/5 pl-4 md:pl-6">
                 Decidimos construir un modelo diferente: diagnóstico honesto, contratos blindados, entregables concretos. Sin promesas vacías. Sin código descartable. Sin dependencia del proveedor.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-4 md:pl-6 border-l-2 border-white/5">
                 Cada sistema que desarrollamos es una pieza de ingeniería diseñada para durar, escalar y adaptarse al ritmo real del negocio que lo usa.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-4 md:pl-6 border-l-2 border-white/5">
                 No somos una agencia creativa ni una consultora genérica. Somos ingenieros que construyen sistemas funcionales, auditables y escalables. Priorizamos arquitecturas que devuelvan al dueño la visibilidad total de su negocio: datos reales, en tiempo real, accesibles desde cualquier dispositivo.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-4 md:pl-6 border-l-2 border-white/5">
                 Cada línea que escribimos tiene propósito. Nuestros entregables están documentados, son mantenibles y transferibles. El negocio no depende de nosotros para seguir funcionando.
               </p>
             </div>
@@ -206,7 +206,7 @@ export default function NosotrosPage() {
             </div>
 
             {/* ── FIGURES ROW ── */}
-            <div className="flex flex-row justify-center items-end gap-12 sm:gap-20 relative z-20 shrink-0">
+            <div className="flex flex-row justify-center items-end gap-6 sm:gap-12 md:gap-20 relative z-20 shrink-0">
 
               {/* ── OBSIDIAN BUNNY (mujer) ── */}
               <div
@@ -235,13 +235,14 @@ export default function NosotrosPage() {
                     <img src="/imagen2femenino.png" alt="Obsidian Bunny Pose" className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-500 ${active === 'bunny' ? 'opacity-100' : 'opacity-0'}`} />
                   </div>
                 </div>
-                <div className="text-center">
+                <div className="text-center flex flex-col items-center">
                   <p className={`font-black text-sm uppercase tracking-widest italic transition-colors duration-500 ${active === 'bunny' ? 'text-violet-300' : 'text-white group-hover:text-violet-200'}`}>
                     Obsidian Bunny
                   </p>
                   <p className={`text-[10px] uppercase tracking-[0.25em] font-bold mt-1 transition-colors duration-500 ${active === 'bunny' ? 'text-violet-300/90' : 'text-violet-300/60'}`}>
                     Co-fundadora Estratega
                   </p>
+                  <div className="lg:hidden mt-3 text-[8px] uppercase tracking-[0.2em] font-black text-violet-300 bg-violet-600/20 border border-violet-500/30 px-3 py-1 rounded-full animate-bounce shadow-[0_0_10px_rgba(139,92,246,0.2)]">Tocar</div>
                 </div>
               </div>
 
@@ -272,13 +273,14 @@ export default function NosotrosPage() {
                     <img src="/imagen2masculino.png" alt="Void Light Pose" className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-500 ${active === 'void' ? 'opacity-100' : 'opacity-0'}`} />
                   </div>
                 </div>
-                <div className="text-center">
+                <div className="text-center flex flex-col items-center">
                   <p className={`font-black text-sm uppercase tracking-widest italic transition-colors duration-500 ${active === 'void' ? 'text-violet-300' : 'text-white group-hover:text-violet-200'}`}>
                     Void Light
                   </p>
                   <p className={`text-[10px] uppercase tracking-[0.25em] font-bold mt-1 transition-colors duration-500 ${active === 'void' ? 'text-violet-300/90' : 'text-violet-300/60'}`}>
                     Co-Fundador Desarrollador
                   </p>
+                  <div className="lg:hidden mt-3 text-[8px] uppercase tracking-[0.2em] font-black text-violet-300 bg-violet-600/20 border border-violet-500/30 px-3 py-1 rounded-full animate-bounce shadow-[0_0_10px_rgba(139,92,246,0.2)]" style={{animationDelay: '0.5s'}}>Tocar</div>
                 </div>
               </div>
 
@@ -340,9 +342,10 @@ export default function NosotrosPage() {
             ¿Hablamos?
           </h3>
           <GmailLink
-            className="inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-xl font-black text-sm hover:bg-violet-600 hover:text-white transition-all hover:scale-105 active:scale-95 shadow-2xl italic uppercase tracking-wide"
+            className="group relative flex w-full max-w-[280px] md:max-w-none md:inline-flex mx-auto items-center justify-center gap-3 md:gap-4 bg-white text-black px-4 md:px-12 py-5 md:py-6 rounded-2xl font-black text-[12px] md:text-sm hover:bg-violet-600 hover:text-white transition-all hover:scale-105 active:scale-95 shadow-2xl overflow-hidden shadow-white/5"
           >
-            obsidianvoidstudio@gmail.com
+            <span className="tracking-widest md:tracking-wide uppercase italic font-bold shrink-0">obsidianvoidstudio@gmail.com</span>
+            <div className="absolute inset-0 bg-white/20 animate-shine -translate-x-full pointer-events-none" />
           </GmailLink>
         </div>
       </section>
