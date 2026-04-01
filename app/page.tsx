@@ -13,7 +13,8 @@ import {
 } from 'lucide-react';
 import DarkBackground from './components/DarkBackground';
 import { FloatingPaths } from './components/BackgroundPaths';
-import { FeatureCard } from '../components/ui/modern-feature-grid';
+import { FeatureCard } from '@/components/ui/modern-feature-grid';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -114,10 +115,13 @@ export default function Home() {
       }, '-=0.35')
       .from(scrollRef.current, { autoAlpha: 0, duration: 0.45 }, '-=0.20');
 
+    // ── Pre-hide elements to prevent flashes and fix load state ──
+    gsap.set('.problem-card, .solution-card', { autoAlpha: 0, y: 34 });
+
     // ── Problem cards — scroll batch ──────────────────────────────────
     ScrollTrigger.batch('.problem-card', {
-      onEnter: batch => gsap.from(batch, {
-        autoAlpha: 0, y: 34, stagger: 0.07, duration: 0.65,
+      onEnter: batch => gsap.to(batch, {
+        autoAlpha: 1, y: 0, stagger: 0.07, duration: 0.65,
         ease: 'power2.out', overwrite: true,
       }),
       start: 'top 88%',
@@ -126,8 +130,8 @@ export default function Home() {
 
     // ── Solution cards — scroll batch ─────────────────────────────────
     ScrollTrigger.batch('.solution-card', {
-      onEnter: batch => gsap.from(batch, {
-        autoAlpha: 0, y: 34, stagger: 0.07, duration: 0.65,
+      onEnter: batch => gsap.to(batch, {
+        autoAlpha: 1, y: 0, stagger: 0.07, duration: 0.65,
         ease: 'power2.out', overwrite: true,
       }),
       start: 'top 88%',
@@ -372,13 +376,12 @@ export default function Home() {
             </p>
           </div>
 
-          <a
-            href="mailto:obsidianvoidstudio@gmail.com"
+          <GmailLink
             className="group relative inline-flex items-center gap-4 bg-white text-black px-12 py-6 rounded-2xl font-black text-lg hover:bg-violet-600 hover:text-white transition-all hover:scale-105 active:scale-95 shadow-2xl overflow-hidden shadow-white/5"
           >
             <span className="tracking-tight uppercase italic font-bold">obsidianvoidstudio@gmail.com</span>
             <div className="absolute inset-0 bg-white/20 animate-shine -translate-x-full pointer-events-none" />
-          </a>
+          </GmailLink>
           <div className="mt-32 flex flex-col items-center gap-8">
             <div className="text-lg font-black tracking-[0.4em] text-white uppercase italic group cursor-default">
               <span className="group-hover:text-violet-500 transition-colors duration-500">OBSIDIAN</span>

@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import DarkBackground from '../components/DarkBackground';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -33,10 +34,10 @@ const voidBio = [
 ];
 
 export default function NosotrosPage() {
-  const containerRef  = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState<'bunny' | 'void' | null>(null);
   const [clicked, setClicked] = useState<'bunny' | 'void' | null>(null);
-  
+
   const active = hovered || clicked;
 
   const handleMouseEnter = (person: 'bunny' | 'void') => setHovered(person);
@@ -44,11 +45,11 @@ export default function NosotrosPage() {
   const toggleClick = (person: 'bunny' | 'void') => {
     setClicked(prev => prev === person ? null : person);
   };
-  const headerRef     = useRef<HTMLDivElement>(null);
-  const logoRef       = useRef<HTMLDivElement>(null);
-  const origenRef     = useRef<HTMLDivElement>(null);
-  const womanRef      = useRef<HTMLDivElement>(null);
-  const manRef        = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const origenRef = useRef<HTMLDivElement>(null);
+  const womanRef = useRef<HTMLDivElement>(null);
+  const manRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     // ── Header entrance ───────────────────────────────────────────────
@@ -109,20 +110,21 @@ export default function NosotrosPage() {
 
         {/* Logo + divider */}
         <div ref={logoRef} className="flex flex-col items-center mb-16 gap-6">
-          <div className="relative w-24 h-24 flex items-center justify-center">
-            <div className="absolute inset-0 bg-violet-600/10 blur-[30px] rounded-full" />
+          <div className="relative w-48 h-48 md:w-[320px] md:h-[320px] flex items-center justify-center group">
+            <div className="absolute inset-[-15%] bg-violet-600/20 blur-[40px] md:blur-[100px] rounded-full opacity-60 animate-pulse" style={{ animationDuration: '4s' }} />
+            <div className="absolute inset-[10%] bg-violet-400/20 blur-[30px] md:blur-[60px] rounded-full opacity-40 animate-pulse" style={{ animationDuration: '3s', animationDelay: '1s' }} />
             <Image
               src="/logo.png"
               alt="Obsidian Void Logo"
-              width={96}
-              height={96}
-              className="relative z-10 object-contain drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]"
+              fill
+              className="relative z-10 object-contain drop-shadow-[0_0_40px_rgba(139,92,246,0.5)] md:drop-shadow-[0_0_80px_rgba(139,92,246,0.5)] animate-pulse"
+              style={{ animationDuration: '4s', animationDelay: '0.5s' }}
               priority
             />
           </div>
           <div className="text-center">
             <p className="text-[10px] text-violet-500/60 font-black uppercase tracking-[0.4em] italic mb-2">
-              Estudio de Ingeniería de Software
+              Consultoría e Ingeniería de Sistemas de Venta y Automatización
             </p>
             <div className="w-px h-12 bg-gradient-to-b from-violet-500/40 to-transparent mx-auto" />
           </div>
@@ -337,12 +339,11 @@ export default function NosotrosPage() {
           <h3 className="text-2xl md:text-3xl font-black text-white italic uppercase tracking-tighter mb-8">
             ¿Hablamos?
           </h3>
-          <a
-            href="mailto:obsidianvoidstudio@gmail.com"
+          <GmailLink
             className="inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-xl font-black text-sm hover:bg-violet-600 hover:text-white transition-all hover:scale-105 active:scale-95 shadow-2xl italic uppercase tracking-wide"
           >
             obsidianvoidstudio@gmail.com
-          </a>
+          </GmailLink>
         </div>
       </section>
     </div>
