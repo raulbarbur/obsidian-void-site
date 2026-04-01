@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav className="fixed w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/5 px-6 h-16 flex items-center justify-between">
       <Link
         href="/"
-        className="text-xl font-black tracking-tighter text-white uppercase italic group cursor-pointer flex items-center gap-2.5"
+        className="text-xl font-black tracking-widest text-white uppercase italic group cursor-pointer flex items-center gap-2.5"
       >
         {/* Logo image — place logo.png in /public/ */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -27,8 +27,10 @@ export default function Navbar() {
           aria-hidden="true"
           className="w-7 h-7 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]"
         />
-        <span className="group-hover:text-violet-500 transition-colors duration-500">OBSIDIAN</span>
-        <span className="text-violet-500 group-hover:text-white transition-colors duration-500">VOID</span>
+        <div className="flex items-center ml-0.5 whitespace-pre">
+          <span className="group-hover:text-violet-500 transition-colors duration-500">OBSIDIAN </span>
+          <span className="text-violet-500 group-hover:text-white transition-colors duration-500">VOID</span>
+        </div>
       </Link>
 
       <div className="hidden md:flex items-center gap-10">

@@ -118,41 +118,16 @@ export default function CasosPage() {
           {/* Right — app mockup preview */}
           <div ref={mockupRef} className="relative group">
             <div className="absolute inset-0 bg-violet-600/20 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            <div className="relative aspect-[4/3] bg-[#07070f] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] p-6 flex flex-col gap-6 group-hover:border-violet-500/35 transition-all duration-500">
-              {/* Window chrome */}
-              <div className="h-4 flex items-center justify-between px-2 border-b border-white/5 pb-6">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/20" />
-                </div>
-                <div className="w-32 h-1.5 bg-neutral-800 rounded-full" />
-              </div>
-              {/* UI layout */}
-              <div className="grid grid-cols-12 gap-6 flex-grow">
-                <div className="col-span-3 bg-neutral-950/50 rounded-2xl p-4 space-y-4 border border-white/5 shadow-inner">
-                  <div className="w-full h-8 bg-violet-600/20 rounded-xl border border-violet-500/20" />
-                  <div className="space-y-2">
-                    <div className="w-full h-1.5 bg-neutral-800 rounded-full opacity-50" />
-                    <div className="w-2/3 h-1.5 bg-neutral-800 rounded-full opacity-50" />
-                  </div>
-                </div>
-                <div className="col-span-9 space-y-6">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="aspect-video bg-neutral-950/50 rounded-3xl border border-white/5 flex items-end p-4 shadow-inner">
-                      <div className="w-full h-1.5 bg-violet-500/30 rounded-full shadow-[0_0_10px_rgba(139,92,246,0.3)]" />
-                    </div>
-                    <div className="aspect-video bg-violet-600/10 rounded-3xl border border-violet-500/30" />
-                    <div className="aspect-video bg-neutral-950/50 rounded-3xl border border-white/5" />
-                  </div>
-                  <div className="h-full bg-neutral-950/80 rounded-[2rem] border border-white/5 relative flex items-center justify-center p-8 shadow-inner overflow-hidden">
-                    <BarChart3 className="text-violet-600/10 animate-pulse" size={48} />
-                    <div className="absolute inset-x-6 top-10 bottom-6 bg-[repeating-linear-gradient(90deg,transparent,transparent_24px,rgba(139,92,246,0.02)_25px)]" />
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60 pointer-events-none rounded-[2.5rem]" />
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-black tracking-[0.5em] text-white/20 whitespace-nowrap italic select-none uppercase">
+            <div className="relative aspect-[4/3] bg-[#07070f] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] group-hover:border-violet-500/40 transition-all duration-700">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/dashboard.png"
+                alt="Obsidian Core Dashboard"
+                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent pointer-events-none" />
+              
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-black tracking-[0.5em] text-white/40 whitespace-nowrap italic select-none uppercase group-hover:text-white/80 transition-colors duration-[800ms]">
                 Obsidian Core // ERP Preview
               </div>
             </div>
