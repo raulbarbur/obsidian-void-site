@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import DarkBackground from './components/DarkBackground';
 import { FloatingPaths } from './components/BackgroundPaths';
+import { FeatureCard } from '../components/ui/modern-feature-grid';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -49,35 +50,35 @@ function AnimatedTitle() {
 
 // ── Data ──────────────────────────────────────────────────────────────
 const problems = [
-  { t: 'No sabés por qué perdés clientes',          d: 'Sin datos del recorrido del cliente, cada abandono es un misterio sin respuesta.' },
-  { t: 'Tu inventario está desordenado',            d: 'Stock mal registrado significa faltantes inesperados, exceso de mercadería y pérdida de margen.' },
-  { t: 'No tenés forma de mostrar tu catálogo',     d: 'Tus productos existen, pero si no tienen visibilidad clara, no generan ventas.' },
-  { t: 'Depende todo de tu memoria',                d: 'Turnos, deudas, stock: cuando el negocio vive en tu cabeza, el límite de crecimiento sos vos.' },
-  { t: 'Tus mensajes y publicaciones no venden',    d: 'Sin copy estructurado ni automatización, el esfuerzo en contenido no convierte en clientes.' },
-  { t: 'No contestás rápido a consultas',           d: 'Un lead que espera más de 5 minutos tiene 10 veces menos probabilidades de cerrar.' },
-  { t: 'Cobros demorados o pagos perdidos',         d: 'Facturación manual y seguimiento informal hacen que el dinero se escape entre los dedos.' },
-  { t: 'No sabés qué producto vende más',           d: 'Sin análisis de rendimiento, tomás decisiones de compra y stock a ciegas.' },
-  { t: 'Perdés horas haciendo siempre lo mismo',    d: 'Tareas repetitivas que podrían automatizarse consumen tiempo que deberías dedicar a crecer.' },
-  { t: 'Datos de clientes en cualquier lado',       d: 'WhatsApp, papel, planilla y memoria: un CRM disperso que no sirve cuando más lo necesitás.' },
-  { t: 'Tu página de ventas no convierte',          d: 'Visitas que llegan y se van. El diseño y el copy de tu página no están optimizados para vender.' },
-  { t: 'Tus clientes no tienen buena experiencia',  d: 'Procesos lentos, respuestas tardías y falta de seguimiento alejan clientes que podrías retener.' },
-  { t: 'No sabés cuánto vas a vender',              d: 'Sin proyección financiera, no podés planificar, invertir ni escalar con confianza.' },
+  { t: 'No sabés por qué perdés clientes', d: 'Sin datos del recorrido del cliente, cada abandono es un misterio sin respuesta.' },
+  { t: 'Tu inventario está desordenado', d: 'Stock mal registrado significa faltantes inesperados, exceso de mercadería y pérdida de margen.' },
+  { t: 'No tenés forma de mostrar tu catálogo', d: 'Tus productos existen, pero si no tienen visibilidad clara, no generan ventas.' },
+  { t: 'Depende todo de tu memoria', d: 'Turnos, deudas, stock: cuando el negocio vive en tu cabeza, el límite de crecimiento sos vos.' },
+  { t: 'Tus mensajes y publicaciones no venden', d: 'Sin copy estructurado ni automatización, el esfuerzo en contenido no convierte en clientes.' },
+  { t: 'No contestás rápido a consultas', d: 'Un lead que espera más de 5 minutos tiene 10 veces menos probabilidades de cerrar.' },
+  { t: 'Cobros demorados o pagos perdidos', d: 'Facturación manual y seguimiento informal hacen que el dinero se escape entre los dedos.' },
+  { t: 'No sabés qué producto vende más', d: 'Sin análisis de rendimiento, tomás decisiones de compra y stock a ciegas.' },
+  { t: 'Perdés horas haciendo siempre lo mismo', d: 'Tareas repetitivas que podrían automatizarse consumen tiempo que deberías dedicar a crecer.' },
+  { t: 'Datos de clientes en cualquier lado', d: 'WhatsApp, papel, planilla y memoria: un CRM disperso que no sirve cuando más lo necesitás.' },
+  { t: 'Tu página de ventas no convierte', d: 'Visitas que llegan y se van. El diseño y el copy de tu página no están optimizados para vender.' },
+  { t: 'Tus clientes no tienen buena experiencia', d: 'Procesos lentos, respuestas tardías y falta de seguimiento alejan clientes que podrías retener.' },
+  { t: 'No sabés cuánto vas a vender', d: 'Sin proyección financiera, no podés planificar, invertir ni escalar con confianza.' },
 ];
 
 const solutions = [
-  { icon: Search,        t: 'Diagnóstico del recorrido del cliente',    d: 'Identificamos dónde se pierden clientes y cómo retenerlos.' },
-  { icon: Package,       t: 'Organización de inventario',               d: 'Controlás tu stock en tiempo real y evitás faltantes o exceso.' },
-  { icon: Globe,         t: 'Catálogo digital',                         d: 'Mostrá tus productos de forma clara y accesible para todos.' },
-  { icon: Database,      t: 'Centralización de procesos',               d: 'Todo en un solo lugar, para que el negocio funcione sin depender solo de vos.' },
-  { icon: MessageSquare, t: 'Optimización de mensajes y contenido',     d: 'Mejoramos textos y publicaciones para generar más ventas.' },
-  { icon: Zap,           t: 'Respuestas rápidas y seguimiento de leads', d: 'CRM y automatización para que ningún cliente se enfríe.' },
-  { icon: DollarSign,    t: 'Automatización de cobros',                 d: 'Facturación y pagos controlados automáticamente para no perder dinero.' },
-  { icon: BarChart3,     t: 'Análisis de productos más vendidos',       d: 'Dashboards que muestran qué funciona y qué no, para tomar decisiones claras.' },
-  { icon: Clock,         t: 'Automatización de tareas repetitivas',     d: 'El software hace lo que siempre repetís, liberando tu tiempo para crecer.' },
-  { icon: Brain,         t: 'Centralización de datos de clientes',      d: 'Toda la información de clientes en un solo lugar, fácil de acceder.' },
-  { icon: List,          t: 'Optimización de tu página de ventas',      d: 'Diseño, copy y estructura para convertir más visitas en clientes.' },
-  { icon: Shield,        t: 'Mejora de la experiencia del cliente',     d: 'Procesos y herramientas que facilitan la interacción y aumentan la satisfacción.' },
-  { icon: TrendingUp,    t: 'Predicción de ingresos',                   d: 'Dashboards financieros que muestran cómo va tu negocio y qué esperar.' },
+  { icon: Search, t: 'Diagnóstico del recorrido del cliente', d: 'Identificamos dónde se pierden clientes y cómo retenerlos.' },
+  { icon: Package, t: 'Organización de inventario', d: 'Controlás tu stock en tiempo real y evitás faltantes o exceso.' },
+  { icon: Globe, t: 'Catálogo digital', d: 'Mostrá tus productos de forma clara y accesible para todos.' },
+  { icon: Database, t: 'Centralización de procesos', d: 'Todo en un solo lugar, para que el negocio funcione sin depender solo de vos.' },
+  { icon: MessageSquare, t: 'Optimización de mensajes y contenido', d: 'Mejoramos textos y publicaciones para generar más ventas.' },
+  { icon: Zap, t: 'Respuestas rápidas y seguimiento de leads', d: 'CRM y automatización para que ningún cliente se enfríe.' },
+  { icon: DollarSign, t: 'Automatización de cobros', d: 'Facturación y pagos controlados automáticamente para no perder dinero.' },
+  { icon: BarChart3, t: 'Análisis de productos más vendidos', d: 'Dashboards que muestran qué funciona y qué no, para tomar decisiones claras.' },
+  { icon: Clock, t: 'Automatización de tareas repetitivas', d: 'El software hace lo que siempre repetís, liberando tu tiempo para crecer.' },
+  { icon: Brain, t: 'Centralización de datos de clientes', d: 'Toda la información de clientes en un solo lugar, fácil de acceder.' },
+  { icon: List, t: 'Optimización de tu página de ventas', d: 'Diseño, copy y estructura para convertir más visitas en clientes.' },
+  { icon: Shield, t: 'Mejora de la experiencia del cliente', d: 'Procesos y herramientas que facilitan la interacción y aumentan la satisfacción.' },
+  { icon: TrendingUp, t: 'Predicción de ingresos', d: 'Dashboards financieros que muestran cómo va tu negocio y qué esperar.' },
 ];
 
 const idealPara = [
@@ -98,15 +99,15 @@ const noEsPara = [
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const badgeRef     = useRef<HTMLDivElement>(null);
-  const subtitleRef  = useRef<HTMLParagraphElement>(null);
-  const ctaRef       = useRef<HTMLDivElement>(null);
-  const scrollRef    = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     // ── Badge + subtítulo + botones — entrada con GSAP ────────────────
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.8 });
-    tl.from(badgeRef.current,    { autoAlpha: 0, y: -16, duration: 0.55 })
+    tl.from(badgeRef.current, { autoAlpha: 0, y: -16, duration: 0.55 })
       .from(subtitleRef.current, { autoAlpha: 0, x: -28, duration: 0.70 }, '-=0.20')
       .from(Array.from(ctaRef.current!.children), {
         autoAlpha: 0, y: 18, stagger: 0.14, duration: 0.55,
@@ -223,28 +224,19 @@ export default function Home() {
         {/* Preámbulo */}
         <div className="mb-14 max-w-3xl">
           <h2 className="text-2xl font-black text-white uppercase tracking-tighter mb-6 border-l-4 border-violet-600 pl-6 italic">
-            Problemas que eliminamos
-          </h2>
-          <p className="pl-6 border-l-2 border-white/5 text-neutral-400 text-sm italic font-medium leading-relaxed">
             Si tenés uno o más de estos problemas, aunque no lo veas, estás perdiendo más ventas de las que pensás.
-          </p>
+          </h2>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {problems.map((item, i) => (
-            <div
+            <FeatureCard
               key={i}
-              className={`problem-card p-6 bg-neutral-950/60 border border-white/5 rounded-2xl hover:bg-violet-950/[0.12] hover:border-violet-500/20 transition-all duration-300 group relative overflow-hidden${i === problems.length - 1 ? ' col-span-2 lg:col-span-2 lg:col-start-2' : ''}`}
-            >
-              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-violet-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top rounded-full" />
-              <AlertCircle className="text-violet-900 group-hover:text-violet-400 mb-3 transition-colors duration-300" size={16} />
-              <h4 className="text-white font-bold mb-2 text-sm tracking-tight group-hover:text-violet-200 group-hover:translate-x-1.5 transition-all duration-300">
-                {item.t}
-              </h4>
-              <p className="text-neutral-600 text-xs leading-relaxed group-hover:text-neutral-400 transition-colors duration-300 italic">
-                {item.d}
-              </p>
-            </div>
+              Icon={AlertCircle}
+              title={item.t}
+              description={item.d}
+              className={i === problems.length - 1 ? ' md:col-span-2 lg:col-span-2 lg:col-start-2' : ''}
+            />
           ))}
         </div>
       </section>
@@ -329,19 +321,21 @@ export default function Home() {
         </div>
 
         {/* ── NO ES PARA ── */}
-        <div className="noespara-col p-12 rounded-[2.5rem] border border-white/5 opacity-40 hover:opacity-70 transition-all duration-700 flex flex-col justify-center bg-black/30">
-          <h3 className="text-neutral-600 font-black text-xs uppercase tracking-[0.4em] mb-10 flex items-center gap-3 italic">
-            <AlertCircle size={16} className="text-neutral-700" />
-            No es para:
-          </h3>
-          <ul className="space-y-6">
-            {noEsPara.map((text, i) => (
-              <li key={i} className="flex gap-4 text-neutral-600 italic font-medium">
-                <ChevronRight size={14} className="mt-1 shrink-0 text-neutral-800" />
-                <span className="text-sm">{text}</span>
-              </li>
-            ))}
-          </ul>
+        <div className="noespara-col group p-12 rounded-[2.5rem] border border-white/5 transition-all duration-700 flex flex-col justify-center bg-black/30">
+          <div className="text-neutral-800 group-hover:text-neutral-200 transition-colors duration-[800ms] ease-out">
+            <h3 className="font-black text-xs uppercase tracking-[0.4em] mb-10 flex items-center gap-3 italic">
+              <AlertCircle size={16} />
+              No es para:
+            </h3>
+            <ul className="space-y-6">
+              {noEsPara.map((text, i) => (
+                <li key={i} className="flex gap-4 italic font-medium">
+                  <ChevronRight size={14} className="mt-1 shrink-0 opacity-50 group-hover:opacity-100 transition-opacity duration-[800ms]" />
+                  <span className="text-sm">{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -362,18 +356,18 @@ export default function Home() {
           </p>
 
           {/* Logo with breathing glow */}
-          <div className="flex flex-col items-center gap-5 mb-16">
+          <div className="flex flex-col items-center gap-5 mb-16 mt-8">
             <div className="relative flex items-center justify-center">
-              <div className="absolute w-32 h-32 bg-violet-600/25 blur-[50px] rounded-full animate-pulse" />
-              <div className="absolute w-20 h-20 bg-violet-500/20 blur-[25px] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+              <div className="absolute w-64 h-64 bg-violet-600/20 blur-[70px] rounded-full animate-pulse" />
+              <div className="absolute w-40 h-40 bg-violet-500/15 blur-[40px] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.png"
                 alt="Obsidian Void"
-                className="relative z-10 w-20 h-20 object-contain drop-shadow-[0_0_24px_rgba(139,92,246,0.7)]"
+                className="relative z-10 w-40 h-40 object-contain drop-shadow-[0_0_32px_rgba(139,92,246,0.6)]"
               />
             </div>
-            <p className="text-neutral-300 font-black italic text-sm tracking-[0.15em] uppercase">
+            <p className="text-neutral-300 font-black italic text-sm tracking-[0.15em] uppercase mt-4">
               Orden en el caos. Poder en tus manos.
             </p>
           </div>
