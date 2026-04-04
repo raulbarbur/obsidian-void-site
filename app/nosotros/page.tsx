@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import DarkBackground from '../components/DarkBackground';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -33,13 +34,22 @@ const voidBio = [
 ];
 
 export default function NosotrosPage() {
-  const containerRef  = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState<'bunny' | 'void' | null>(null);
-  const headerRef     = useRef<HTMLDivElement>(null);
-  const logoRef       = useRef<HTMLDivElement>(null);
-  const origenRef     = useRef<HTMLDivElement>(null);
-  const womanRef      = useRef<HTMLDivElement>(null);
-  const manRef        = useRef<HTMLDivElement>(null);
+  const [clicked, setClicked] = useState<'bunny' | 'void' | null>(null);
+
+  const active = hovered || clicked;
+
+  const handleMouseEnter = (person: 'bunny' | 'void') => setHovered(person);
+  const handleMouseLeave = () => setHovered(null);
+  const toggleClick = (person: 'bunny' | 'void') => {
+    setClicked(prev => prev === person ? null : person);
+  };
+  const headerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const origenRef = useRef<HTMLDivElement>(null);
+  const womanRef = useRef<HTMLDivElement>(null);
+  const manRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     // ── Header entrance ───────────────────────────────────────────────
@@ -100,20 +110,21 @@ export default function NosotrosPage() {
 
         {/* Logo + divider */}
         <div ref={logoRef} className="flex flex-col items-center mb-16 gap-6">
-          <div className="relative w-24 h-24 flex items-center justify-center">
-            <div className="absolute inset-0 bg-violet-600/10 blur-[30px] rounded-full" />
+          <div className="relative w-48 h-48 md:w-[320px] md:h-[320px] flex items-center justify-center group">
+            <div className="absolute inset-[-15%] bg-violet-600/20 blur-[40px] md:blur-[100px] rounded-full opacity-60 animate-pulse" style={{ animationDuration: '4s' }} />
+            <div className="absolute inset-[10%] bg-violet-400/20 blur-[30px] md:blur-[60px] rounded-full opacity-40 animate-pulse" style={{ animationDuration: '3s', animationDelay: '1s' }} />
             <Image
               src="/logo.png"
               alt="Obsidian Void Logo"
-              width={96}
-              height={96}
-              className="relative z-10 object-contain drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]"
+              fill
+              className="relative z-10 object-contain drop-shadow-[0_0_40px_rgba(139,92,246,0.5)] md:drop-shadow-[0_0_80px_rgba(139,92,246,0.5)] animate-pulse"
+              style={{ animationDuration: '4s', animationDelay: '0.5s' }}
               priority
             />
           </div>
           <div className="text-center">
             <p className="text-[10px] text-violet-500/60 font-black uppercase tracking-[0.4em] italic mb-2">
-              Estudio de Ingeniería de Software
+              Consultoría e Ingeniería de Sistemas de Venta y Automatización
             </p>
             <div className="w-px h-12 bg-gradient-to-b from-violet-500/40 to-transparent mx-auto" />
           </div>
@@ -122,33 +133,27 @@ export default function NosotrosPage() {
         <div ref={origenRef}>
           {/* ── Origen ── */}
           <div className="mb-20">
-            <h2 className="text-2xl md:text-3xl font-black text-white italic uppercase tracking-tight mb-8 border-l-4 border-violet-600 pl-6">
+            <h2 className="text-2xl md:text-3xl font-black text-white italic uppercase tracking-tight mb-8 border-l-4 border-violet-600 pl-4 md:pl-6">
               El Origen
             </h2>
             <div className="pl-0 md:pl-10 space-y-6">
-              <p className="text-neutral-300 text-base leading-relaxed italic font-medium border-l-2 border-violet-500/25 pl-6">
+              <p className="text-neutral-300 text-base leading-relaxed italic font-medium border-l-2 border-violet-500/25 pl-4 md:pl-6">
                 Obsidian Void nació de la convicción de que los negocios pequeños y medianos merecen la misma tecnología de control que las grandes corporaciones —sin la burocracia, sin los costos inflados, sin las soluciones genéricas.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-4 md:pl-6 border-l-2 border-white/5">
                 Fundamos el estudio tras años de ver dueños de comercios operar con cuadernos, hojas de cálculo y memoria humana como únicos sistemas de gestión. La ineficiencia no era por falta de voluntad: era por falta de acceso a ingeniería real.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic border-l-2 border-white/5 pl-6">
+              <p className="text-neutral-500 text-sm leading-relaxed italic border-l-2 border-white/5 pl-4 md:pl-6">
                 Decidimos construir un modelo diferente: diagnóstico honesto, contratos blindados, entregables concretos. Sin promesas vacías. Sin código descartable. Sin dependencia del proveedor.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-4 md:pl-6 border-l-2 border-white/5">
                 Cada sistema que desarrollamos es una pieza de ingeniería diseñada para durar, escalar y adaptarse al ritmo real del negocio que lo usa.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
-                No somos una agencia creativa ni una consultora genérica. En Obsidian Void nos enfocamos en resolver problemas reales, no en tecnicismos ni etiquetas como CRM o ERP.
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-4 md:pl-6 border-l-2 border-white/5">
+                No somos una agencia creativa ni una consultora genérica. Somos ingenieros que construyen sistemas funcionales, auditables y escalables. Priorizamos arquitecturas que devuelvan al dueño la visibilidad total de su negocio: datos reales, en tiempo real, accesibles desde cualquier dispositivo.
               </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
-                Construimos sistemas que se adaptan al negocio, diseñados para escalar y acompañar su crecimiento.
-              </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
-                Nuestro trabajo no termina en la entrega: estamos cuando el negocio necesita evolucionar, mejorar o expandirse.
-              </p>
-              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
-                Priorizamos arquitecturas que devuelvan al dueño la visibilidad total de su negocio: datos reales, en tiempo real, accesibles desde cualquier dispositivo.
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-4 md:pl-6 border-l-2 border-white/5">
+                Cada línea que escribimos tiene propósito. Nuestros entregables están documentados, son mantenibles y transferibles. El negocio no depende de nosotros para seguir funcionando.
               </p>
             </div>
           </div>
@@ -174,24 +179,24 @@ export default function NosotrosPage() {
         </div>
 
         {/* Siluetas */}
-        <section className="py-20 px-6 max-w-6xl mx-auto">
-          <div className="flex flex-col lg:flex-row items-end justify-center gap-8 lg:gap-12">
+        <section className="py-20 px-6 max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-end justify-center gap-6 lg:gap-10">
 
-            {/* ── BIO PANEL (left, shared) ── */}
+            {/* ── BIO PANEL BUNNY (left, desktop only) ── */}
             <div
-              className="w-full lg:w-72 shrink-0 self-center transition-all duration-500 ease-out"
+              className="w-full lg:w-80 shrink-0 self-center transition-all duration-500 ease-out hidden lg:block"
               style={{
-                opacity: hovered ? 1 : 0,
-                transform: hovered ? 'translateX(0)' : 'translateX(-16px)',
-                pointerEvents: hovered ? 'auto' : 'none',
+                opacity: active === 'bunny' ? 1 : 0,
+                transform: active === 'bunny' ? 'translateX(0)' : 'translateX(-16px)',
+                pointerEvents: active === 'bunny' ? 'auto' : 'none',
               }}
             >
-              <div className="bg-black border border-white/10 rounded-2xl p-6 shadow-2xl shadow-violet-900/20">
-                <p className="text-violet-400 font-black text-[10px] uppercase tracking-[0.3em] italic mb-3">
-                  {hovered === 'bunny' ? 'Obsidian Bunny — Estratega' : 'Void Light — Desarrollador'}
+              <div className="bg-black/40 border border-white/10 rounded-2xl p-6 shadow-2xl shadow-violet-900/20 backdrop-blur-md">
+                <p className="text-violet-400 font-black text-[10px] uppercase tracking-[0.3em] italic mb-4">
+                  Obsidian Bunny — Estratega
                 </p>
-                <div className="space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin">
-                  {(hovered === 'bunny' ? bunnyBio : voidBio).map((line, i) => (
+                <div className="space-y-4">
+                  {bunnyBio.map((line, i) => (
                     <p key={i} className={`text-xs leading-relaxed italic ${i === 0 ? 'text-white font-bold' : 'text-neutral-400'}`}>
                       {line}
                     </p>
@@ -201,18 +206,19 @@ export default function NosotrosPage() {
             </div>
 
             {/* ── FIGURES ROW ── */}
-            <div className="flex flex-row justify-center items-end gap-12 sm:gap-20">
+            <div className="flex flex-row justify-center items-end gap-6 sm:gap-12 md:gap-20 relative z-20 shrink-0">
 
               {/* ── OBSIDIAN BUNNY (mujer) ── */}
               <div
                 ref={womanRef}
-                className="flex flex-col items-center gap-6 group cursor-default"
-                onMouseEnter={() => setHovered('bunny')}
-                onMouseLeave={() => setHovered(null)}
+                className="flex flex-col items-center gap-6 cursor-pointer group"
+                onMouseEnter={() => handleMouseEnter('bunny')}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => toggleClick('bunny')}
               >
                 <div className="relative flex items-end justify-center">
                   <div
-                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    className={`absolute inset-0 rounded-full transition-opacity duration-700 pointer-events-none ${active === 'bunny' ? 'opacity-100' : 'opacity-0'}`}
                     style={{
                       background: 'radial-gradient(ellipse 70% 90% at 50% 80%, rgba(139,92,246,0.35) 0%, rgba(109,40,217,0.15) 50%, transparent 75%)',
                       filter: 'blur(24px)',
@@ -220,35 +226,37 @@ export default function NosotrosPage() {
                     }}
                   />
                   <div
-                    className="relative transition-all duration-700 group-hover:[filter:drop-shadow(0_0_22px_rgba(139,92,246,0.80))_drop-shadow(0_0_50px_rgba(109,40,217,0.45))]"
+                    className={`relative transition-all duration-700 ${active === 'bunny' ? '[filter:drop-shadow(0_0_22px_rgba(139,92,246,0.80))_drop-shadow(0_0_50px_rgba(109,40,217,0.45))]' : 'group-hover:[filter:drop-shadow(0_0_22px_rgba(139,92,246,0.2))]'}`}
                     style={{ width: 'clamp(140px, 20vw, 220px)', height: 'clamp(320px, 45vw, 500px)' }}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/imagen1femenino.png" alt="Obsidian Bunny" className="block group-hover:hidden w-full h-full object-contain object-bottom" />
+                    <img src="/imagen1femenino.png" alt="Obsidian Bunny" className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-500 ${active === 'bunny' ? 'opacity-0' : 'opacity-100'}`} />
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/imagen2femenino.png" alt="Obsidian Bunny" className="hidden group-hover:block w-full h-full object-contain object-bottom" />
+                    <img src="/imagen2femenino.png" alt="Obsidian Bunny Pose" className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-500 ${active === 'bunny' ? 'opacity-100' : 'opacity-0'}`} />
                   </div>
                 </div>
-                <div className="text-center">
-                  <p className="text-white font-black text-sm uppercase tracking-widest italic transition-colors duration-500 group-hover:text-violet-300">
+                <div className="text-center flex flex-col items-center">
+                  <p className={`font-black text-sm uppercase tracking-widest italic transition-colors duration-500 ${active === 'bunny' ? 'text-violet-300' : 'text-white group-hover:text-violet-200'}`}>
                     Obsidian Bunny
                   </p>
-                  <p className="text-violet-300/60 text-[10px] uppercase tracking-[0.25em] font-bold mt-1 transition-colors duration-500 group-hover:text-violet-300/90">
+                  <p className={`text-[10px] uppercase tracking-[0.25em] font-bold mt-1 transition-colors duration-500 ${active === 'bunny' ? 'text-violet-300/90' : 'text-violet-300/60'}`}>
                     Co-fundadora Estratega
                   </p>
+                  <div className="lg:hidden mt-3 text-[8px] uppercase tracking-[0.2em] font-black text-violet-300 bg-violet-600/20 border border-violet-500/30 px-3 py-1 rounded-full animate-bounce shadow-[0_0_10px_rgba(139,92,246,0.2)]">Tocar</div>
                 </div>
               </div>
 
               {/* ── VOID LIGHT (hombre) ── */}
               <div
                 ref={manRef}
-                className="flex flex-col items-center gap-6 group cursor-default"
-                onMouseEnter={() => setHovered('void')}
-                onMouseLeave={() => setHovered(null)}
+                className="flex flex-col items-center gap-6 cursor-pointer group"
+                onMouseEnter={() => handleMouseEnter('void')}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => toggleClick('void')}
               >
                 <div className="relative flex items-end justify-center">
                   <div
-                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    className={`absolute inset-0 rounded-full transition-opacity duration-700 pointer-events-none ${active === 'void' ? 'opacity-100' : 'opacity-0'}`}
                     style={{
                       background: 'radial-gradient(ellipse 70% 90% at 50% 80%, rgba(139,92,246,0.35) 0%, rgba(109,40,217,0.15) 50%, transparent 75%)',
                       filter: 'blur(24px)',
@@ -256,26 +264,69 @@ export default function NosotrosPage() {
                     }}
                   />
                   <div
-                    className="relative transition-all duration-700 group-hover:[filter:drop-shadow(0_0_22px_rgba(139,92,246,0.80))_drop-shadow(0_0_50px_rgba(109,40,217,0.45))]"
+                    className={`relative transition-all duration-700 ${active === 'void' ? '[filter:drop-shadow(0_0_22px_rgba(139,92,246,0.80))_drop-shadow(0_0_50px_rgba(109,40,217,0.45))]' : 'group-hover:[filter:drop-shadow(0_0_22px_rgba(139,92,246,0.2))]'}`}
                     style={{ width: 'clamp(120px, 17vw, 190px)', height: 'clamp(320px, 45vw, 500px)' }}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/imagen1masculino.png" alt="Void Light" className="block group-hover:hidden w-full h-full object-contain object-bottom" />
+                    <img src="/imagen1masculino.png" alt="Void Light" className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-500 ${active === 'void' ? 'opacity-0' : 'opacity-100'}`} />
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/imagen2masculino.png" alt="Void Light" className="hidden group-hover:block w-full h-full object-contain object-bottom" />
+                    <img src="/imagen2masculino.png" alt="Void Light Pose" className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-500 ${active === 'void' ? 'opacity-100' : 'opacity-0'}`} />
                   </div>
                 </div>
-                <div className="text-center">
-                  <p className="text-white font-black text-sm uppercase tracking-widest italic transition-colors duration-500 group-hover:text-violet-300">
+                <div className="text-center flex flex-col items-center">
+                  <p className={`font-black text-sm uppercase tracking-widest italic transition-colors duration-500 ${active === 'void' ? 'text-violet-300' : 'text-white group-hover:text-violet-200'}`}>
                     Void Light
                   </p>
-                  <p className="text-violet-300/60 text-[10px] uppercase tracking-[0.25em] font-bold mt-1 transition-colors duration-500 group-hover:text-violet-300/90">
+                  <p className={`text-[10px] uppercase tracking-[0.25em] font-bold mt-1 transition-colors duration-500 ${active === 'void' ? 'text-violet-300/90' : 'text-violet-300/60'}`}>
                     Co-Fundador Desarrollador
                   </p>
+                  <div className="lg:hidden mt-3 text-[8px] uppercase tracking-[0.2em] font-black text-violet-300 bg-violet-600/20 border border-violet-500/30 px-3 py-1 rounded-full animate-bounce shadow-[0_0_10px_rgba(139,92,246,0.2)]" style={{animationDelay: '0.5s'}}>Tocar</div>
                 </div>
               </div>
 
             </div>
+
+            {/* ── BIO PANEL VOID (right, desktop only) ── */}
+            <div
+              className="w-full lg:w-80 shrink-0 self-center transition-all duration-500 ease-out hidden lg:block"
+              style={{
+                opacity: active === 'void' ? 1 : 0,
+                transform: active === 'void' ? 'translateX(0)' : 'translateX(16px)',
+                pointerEvents: active === 'void' ? 'auto' : 'none',
+              }}
+            >
+              <div className="bg-black/40 border border-white/10 rounded-2xl p-6 shadow-2xl shadow-violet-900/20 backdrop-blur-md">
+                <p className="text-violet-400 font-black text-[10px] uppercase tracking-[0.3em] italic mb-4">
+                  Void Light — Desarrollador
+                </p>
+                <div className="space-y-4">
+                  {voidBio.map((line, i) => (
+                    <p key={i} className={`text-xs leading-relaxed italic ${i === 0 ? 'text-white font-bold' : 'text-neutral-400'}`}>
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* ── MOBILE BIO RENDERING ── */}
+            <div className="lg:hidden w-full mt-8">
+              {active && (
+                <div className="bg-black/40 border border-white/10 rounded-2xl p-6 shadow-2xl shadow-violet-900/20 backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <p className="text-violet-400 font-black text-[10px] uppercase tracking-[0.3em] italic mb-4">
+                    {active === 'bunny' ? 'Obsidian Bunny — Estratega' : 'Void Light — Desarrollador'}
+                  </p>
+                  <div className="space-y-4">
+                    {(active === 'bunny' ? bunnyBio : voidBio).map((line, i) => (
+                      <p key={i} className={`text-xs leading-relaxed italic ${i === 0 ? 'text-white font-bold' : 'text-neutral-400'}`}>
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
           </div>
         </section>
 
@@ -290,12 +341,12 @@ export default function NosotrosPage() {
           <h3 className="text-2xl md:text-3xl font-black text-white italic uppercase tracking-tighter mb-8">
             ¿Hablamos?
           </h3>
-          <a
-            href="mailto:obsidianvoidstudio@gmail.com"
-            className="inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-xl font-black text-sm hover:bg-violet-600 hover:text-white transition-all hover:scale-105 active:scale-95 shadow-2xl italic uppercase tracking-wide"
+          <GmailLink
+            className="group relative flex w-full max-w-[280px] md:max-w-none md:inline-flex mx-auto items-center justify-center gap-3 md:gap-4 bg-white text-black px-4 md:px-12 py-5 md:py-6 rounded-2xl font-black text-[12px] md:text-sm hover:bg-violet-600 hover:text-white transition-all hover:scale-105 active:scale-95 shadow-2xl overflow-hidden shadow-white/5"
           >
-            obsidianvoidstudio@gmail.com
-          </a>
+            <span className="tracking-widest md:tracking-wide uppercase italic font-bold shrink-0">obsidianvoidstudio@gmail.com</span>
+            <div className="absolute inset-0 bg-white/20 animate-shine -translate-x-full pointer-events-none" />
+          </GmailLink>
         </div>
       </section>
     </div>

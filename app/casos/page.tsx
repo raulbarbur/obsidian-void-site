@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BarChart3 } from 'lucide-react';
 import DarkBackground from '../components/DarkBackground';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -74,7 +75,7 @@ export default function CasosPage() {
            CASO 1: GUAPECANES
           ════════════════════════════════════════════ */}
       <section className="py-20 px-6 max-w-6xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
           {/* Left — case narrative */}
           <div ref={narrativeRef} className="relative">
@@ -96,19 +97,19 @@ export default function CasosPage() {
               </p>
 
               {/* Result card */}
-              <div className="p-8 bg-neutral-900/60 backdrop-blur-sm border border-white/5 border-l-4 border-l-violet-500 rounded-r-2xl space-y-6 relative group overflow-hidden shadow-2xl hover:bg-neutral-900/80 transition-colors">
+              <div className="p-6 sm:p-8 bg-neutral-900/60 backdrop-blur-sm border border-white/5 border-l-4 border-l-violet-500 rounded-r-2xl space-y-5 sm:space-y-6 relative group overflow-hidden shadow-2xl hover:bg-neutral-900/80 transition-colors">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-violet-600/5 blur-3xl -z-10 group-hover:bg-violet-600/10 transition-colors" />
-                <p className="italic text-neutral-200 text-base leading-relaxed font-bold tracking-tight">
+                <p className="italic text-neutral-200 text-sm sm:text-base leading-relaxed font-bold tracking-tight">
                   &ldquo;Automatizamos la lógica transaccional de pagos parciales a proveedores y creamos una agenda inteligente que neutralizó los errores de cruce de turnos en peluquería, garantizando que cada peso sea trazable.&rdquo;
                 </p>
-                <div className="flex gap-10 pt-4">
+                <div className="flex gap-6 sm:gap-10 pt-4">
                   <div className="flex flex-col items-center group-hover:scale-110 transition-transform">
-                    <span className="text-white font-black text-3xl italic tracking-tighter">95%</span>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-violet-500 mt-2 italic">Error Eliminado</span>
+                    <span className="text-white font-black text-2xl sm:text-3xl italic tracking-tighter">95%</span>
+                    <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-violet-500 mt-2 italic text-center">Error<br className="sm:hidden" /> Eliminado</span>
                   </div>
                   <div className="flex flex-col items-center group-hover:scale-110 transition-transform">
-                    <span className="text-white font-black text-3xl italic tracking-tighter font-mono uppercase">PWA</span>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-violet-500 mt-2 italic">Acceso Remoto</span>
+                    <span className="text-white font-black text-2xl sm:text-3xl italic tracking-tighter font-mono uppercase">PWA</span>
+                    <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-violet-500 mt-2 italic text-center">Acceso<br className="sm:hidden" /> Remoto</span>
                   </div>
                 </div>
               </div>
@@ -116,46 +117,31 @@ export default function CasosPage() {
           </div>
 
           {/* Right — app mockup preview */}
-          <div ref={mockupRef} className="relative group">
-            <div className="absolute inset-0 bg-violet-600/20 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            <div className="relative aspect-[4/3] bg-[#07070f] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] p-6 flex flex-col gap-6 group-hover:border-violet-500/35 transition-all duration-500">
-              {/* Window chrome */}
-              <div className="h-4 flex items-center justify-between px-2 border-b border-white/5 pb-6">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/20" />
-                </div>
-                <div className="w-32 h-1.5 bg-neutral-800 rounded-full" />
+          <div ref={mockupRef} className="relative group mt-4 lg:mt-0">
+            <div className="absolute inset-0 bg-violet-600/20 blur-[60px] md:blur-[100px] rounded-full opacity-50 md:opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <a 
+              href="https://abysstracker-guapecanes-demo.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="relative aspect-[4/3] block bg-[#07070f] border border-white/10 rounded-3xl md:rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] md:group-hover:border-violet-500/40 transition-all duration-700"
+            >
+              {/* Mobile "Tap to view demo" indicator */}
+              <div className="md:hidden absolute top-4 right-4 z-20 bg-violet-600/60 backdrop-blur-md border border-violet-500/50 text-[9px] uppercase font-black tracking-widest text-white px-3 py-1.5 rounded-full animate-pulse shadow-[0_0_15px_rgba(139,92,246,0.5)]">
+                Tocar para Demo
               </div>
-              {/* UI layout */}
-              <div className="grid grid-cols-12 gap-6 flex-grow">
-                <div className="col-span-3 bg-neutral-950/50 rounded-2xl p-4 space-y-4 border border-white/5 shadow-inner">
-                  <div className="w-full h-8 bg-violet-600/20 rounded-xl border border-violet-500/20" />
-                  <div className="space-y-2">
-                    <div className="w-full h-1.5 bg-neutral-800 rounded-full opacity-50" />
-                    <div className="w-2/3 h-1.5 bg-neutral-800 rounded-full opacity-50" />
-                  </div>
-                </div>
-                <div className="col-span-9 space-y-6">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="aspect-video bg-neutral-950/50 rounded-3xl border border-white/5 flex items-end p-4 shadow-inner">
-                      <div className="w-full h-1.5 bg-violet-500/30 rounded-full shadow-[0_0_10px_rgba(139,92,246,0.3)]" />
-                    </div>
-                    <div className="aspect-video bg-violet-600/10 rounded-3xl border border-violet-500/30" />
-                    <div className="aspect-video bg-neutral-950/50 rounded-3xl border border-white/5" />
-                  </div>
-                  <div className="h-full bg-neutral-950/80 rounded-[2rem] border border-white/5 relative flex items-center justify-center p-8 shadow-inner overflow-hidden">
-                    <BarChart3 className="text-violet-600/10 animate-pulse" size={48} />
-                    <div className="absolute inset-x-6 top-10 bottom-6 bg-[repeating-linear-gradient(90deg,transparent,transparent_24px,rgba(139,92,246,0.02)_25px)]" />
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60 pointer-events-none rounded-[2.5rem]" />
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-black tracking-[0.5em] text-white/20 whitespace-nowrap italic select-none uppercase">
+
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/dashboard.png"
+                alt="Obsidian Core Dashboard"
+                className="w-full h-full object-cover opacity-80 md:opacity-70 md:group-hover:opacity-100 transition-all duration-1000 md:group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 md:via-black/10 to-transparent pointer-events-none" />
+              
+              <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 text-[9px] md:text-[10px] font-black tracking-[0.4em] md:tracking-[0.5em] text-white/70 md:text-white/40 whitespace-nowrap italic select-none uppercase md:group-hover:text-white/80 transition-colors duration-[800ms]">
                 Obsidian Core // ERP Preview
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -163,17 +149,17 @@ export default function CasosPage() {
       {/* ════════════════════════════════════════════
            PRÓXIMOS CASOS
           ════════════════════════════════════════════ */}
-      <section className="py-20 px-6 max-w-6xl mx-auto relative z-10 border-t border-white/5">
+      <section className="py-20 px-6 max-w-6xl mx-auto relative z-10 border-t border-white/5 overflow-hidden">
         <h3 className="text-sm font-black text-neutral-700 uppercase tracking-widest italic mb-12">
           Próximos casos
         </h3>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-6 pb-6 md:pb-0 md:grid md:grid-cols-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] -mx-6 px-6 md:mx-0 md:px-0">
           {['Caso II — Próximamente', 'Caso III — Próximamente', 'Caso IV — Próximamente'].map((label, i) => (
             <div
               key={i}
-              className="caso-placeholder aspect-video rounded-2xl border border-white/4 bg-[#07070f] flex items-center justify-center"
+              className="caso-placeholder shrink-0 w-[85%] sm:w-[60%] md:w-auto aspect-video rounded-2xl border border-white/4 bg-[#07070f] flex items-center justify-center snap-center"
             >
-              <p className="text-[11px] font-black uppercase tracking-widest text-neutral-800 italic">
+              <p className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-neutral-800 italic">
                 {label}
               </p>
             </div>
@@ -183,12 +169,11 @@ export default function CasosPage() {
 
       {/* ── FOOTER MINI ── */}
       <div className="border-t border-white/5 py-16 text-center relative z-10 pb-24">
-        <a
-          href="mailto:obsidianvoidstudio@gmail.com"
+        <GmailLink
           className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-neutral-600 hover:text-violet-400 transition-colors italic"
         >
           ¿Querés ser el próximo caso? Escribinos →
-        </a>
+        </GmailLink>
       </div>
     </div>
   );

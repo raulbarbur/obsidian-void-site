@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import DarkBackground from '../components/DarkBackground';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -169,7 +170,7 @@ export default function ProtocolPage() {
           <ObsidianGem size={32} />
           <div>
             <p className="text-[10px] text-violet-400 font-black uppercase tracking-[0.3em] italic">Protocolo Obsidian</p>
-            <p className="text-neutral-600 text-[10px] uppercase tracking-widest font-bold">Parte I — Fundamento</p>
+            <p className="text-neutral-600 text-[10px] uppercase tracking-widest font-bold">Fundamentos</p>
           </div>
           <div className="flex-1 h-px bg-gradient-to-r from-violet-500/30 to-transparent ml-4" />
         </div>
@@ -178,9 +179,9 @@ export default function ProtocolPage() {
           {part1Steps.map((step) => (
             <div
               key={step.i}
-              className="protocol-step-1 flex flex-col md:flex-row gap-8 md:gap-20 items-start group relative"
+              className="protocol-step-1 flex flex-row gap-5 md:gap-20 items-start group relative"
             >
-              <span className="text-[6rem] md:text-[9rem] font-black text-neutral-900 group-hover:text-violet-500/12 transition-all duration-1000 select-none leading-none tracking-tighter italic shrink-0">
+              <span className="text-[4rem] md:text-[9rem] font-black text-neutral-900 group-hover:text-violet-500/12 transition-all duration-1000 select-none leading-none tracking-tighter italic shrink-0">
                 {step.i}
               </span>
               <div className="pt-2 md:pt-8 relative z-10">
@@ -235,9 +236,9 @@ export default function ProtocolPage() {
           {part2Steps.map((step) => (
             <div
               key={step.i}
-              className="protocol-step-2 flex flex-col md:flex-row gap-8 md:gap-20 items-start group relative"
+              className="protocol-step-2 flex flex-row gap-5 md:gap-20 items-start group relative"
             >
-              <span className="text-[6rem] md:text-[9rem] font-black text-neutral-900 group-hover:text-violet-500/12 transition-all duration-1000 select-none leading-none tracking-tighter italic shrink-0">
+              <span className="text-[4rem] md:text-[9rem] font-black text-neutral-900 group-hover:text-violet-500/12 transition-all duration-1000 select-none leading-none tracking-tighter italic shrink-0">
                 {step.i}
               </span>
               <div className="pt-2 md:pt-8 relative z-10">
@@ -255,12 +256,11 @@ export default function ProtocolPage() {
 
       {/* ── FOOTER MINI ── */}
       <div className="border-t border-white/5 py-16 text-center relative z-10">
-        <a
-          href="mailto:obsidianvoidstudio@gmail.com"
+        <GmailLink
           className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-neutral-600 hover:text-violet-400 transition-colors italic"
         >
           ¿Preguntas sobre el protocolo? Escribinos →
-        </a>
+        </GmailLink>
       </div>
     </div>
   );

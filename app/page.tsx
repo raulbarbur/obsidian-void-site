@@ -1,20 +1,143 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
-  CheckCircle2, AlertCircle, ChevronRight,
+  CheckCircle2, AlertCircle, ChevronRight, ChevronDown,
   Zap, Shield, Database, BarChart3, Package, Clock,
   Search, List, Globe, Brain, MessageSquare, DollarSign,
   TrendingUp,
 } from 'lucide-react';
 import DarkBackground from './components/DarkBackground';
 import { FloatingPaths } from './components/BackgroundPaths';
+import { FeatureCard } from '@/components/ui/modern-feature-grid';
+import { GmailLink } from '@/components/ui/gmail-link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+function cn(...classes: (string | undefined | null | false)[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
+// ── Solution Card Component ───────────────────────────────────────────
+function SolutionCard({ item }: { item: any }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const Icon = item.icon;
+
+  return (
+    <div
+      className="solution-card group px-6 md:px-8 py-5 flex items-start gap-4 md:gap-5 hover:bg-violet-950/[0.12] transition-all duration-300 cursor-pointer relative"
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      {/* Left accent line */}
+      <div className={cn("absolute left-0 top-0 bottom-0 w-0.5 bg-violet-500 transition-transform duration-300 origin-top", isOpen ? "scale-y-100" : "scale-y-0 group-hover:scale-y-100")} />
+
+      {/* Icon */}
+      <Icon
+        className={cn("transition-colors duration-300 mt-0.5 shrink-0", isOpen ? "text-violet-400" : "text-violet-800 group-hover:text-violet-400")}
+        size={16}
+      />
+
+      {/* Title + expandable description */}
+      <div className="flex-1 min-w-0">
+        <h4 className={cn("font-bold text-[13px] md:text-sm tracking-tight transition-colors duration-300", isOpen ? "text-violet-200" : "text-neutral-200 group-hover:text-violet-200")}>
+          {item.t}
+        </h4>
+        <div
+          className={cn(
+            "grid transition-all duration-300 ease-in-out",
+            isOpen ? "grid-rows-[1fr] opacity-100 mt-2" : "grid-rows-[0fr] opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100 md:group-hover:mt-2"
+          )}
+        >
+          <div className="overflow-hidden">
+            <p className="text-neutral-400 text-xs leading-relaxed italic pb-1">
+              {item.d}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Chevron indicator */}
+      <ChevronDown
+        className={cn("transition-all duration-300 mt-0.5 shrink-0", isOpen ? "rotate-180 text-violet-500/70" : "rotate-0 text-violet-900/40 group-hover:text-violet-500/70 md:group-hover:rotate-180")}
+        size={14}
+      />
+    </div>
+  );
+}
+
+// ── Ideal/No Es Para Component ──────────────────────────────────────────
+function IdealSection({ idealPara, noEsPara }: { idealPara: string[]; noEsPara: string[] }) {
+  const [activeTab, setActiveTab] = useState<'ideal' | 'noes'>('ideal');
+
+  return (
+    <section className="py-24 px-6 max-w-6xl mx-auto border-b border-white/5 pb-32 relative z-10 overflow-hidden">
+
+      {/* ── MOBILE TABS ── */}
+      <div className="flex md:hidden bg-white/5 border border-white/10 rounded-full p-1.5 mb-10 relative shadow-inner">
+        <div
+          className={cn("absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-violet-600/70 rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(139,92,246,0.3)]", activeTab === 'ideal' ? "left-1.5" : "left-[calc(50%+4.5px)] bg-neutral-800")}
+        />
+        <button
+          onClick={() => setActiveTab('ideal')}
+          className={cn("flex-1 py-3.5 text-[11px] font-black uppercase tracking-widest rounded-full transition-all duration-300 z-10 italic", activeTab === 'ideal' ? "text-white" : "text-neutral-400")}
+        >
+          ✓ Ideal para
+        </button>
+        <button
+          onClick={() => setActiveTab('noes')}
+          className={cn("flex-1 py-3.5 text-[11px] font-black uppercase tracking-widest rounded-full transition-all duration-300 z-10 italic", activeTab === 'noes' ? "text-white" : "text-neutral-400")}
+        >
+          × No es para
+        </button>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-8 items-start">
+        {/* ── IDEAL PARA ── */}
+        <div className={cn("ideal-col bg-neutral-900/50 p-8 md:p-12 rounded-[2.5rem] border border-violet-500/20 relative overflow-hidden md:shadow-inner md:shadow-violet-900/10 md:hover:border-violet-500/40 transition-all duration-700", activeTab === 'noes' ? "hidden md:block" : "block")}>
+          <div className="absolute top-0 right-0 w-80 h-80 bg-violet-600/15 blur-[120px] -z-10 group-hover:bg-violet-600/20 transition-colors duration-1000 rounded-full" />
+          <h3 className="text-violet-400 font-black text-xs uppercase tracking-[0.4em] mb-8 md:mb-10 flex items-center gap-3 italic">
+            <CheckCircle2 size={16} className="text-violet-500" />
+            Ideal para:
+          </h3>
+          <ul className="space-y-6">
+            {idealPara.map((text, i) => (
+              <li key={i} className="flex gap-4 items-start text-neutral-300 group/item cursor-default">
+                <span className="text-violet-500/50 font-black italic text-sm md:group-hover/item:text-violet-400 transition-colors shrink-0 mt-0.5">
+                  0{i + 1}.
+                </span>
+                <p className="text-[13px] md:text-sm font-semibold tracking-tight leading-relaxed md:group-hover/item:text-white md:group-hover/item:translate-x-1 transition-all duration-200">
+                  {text}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ── NO ES PARA ── */}
+        <div className={cn("noespara-col group p-8 md:p-12 rounded-[2.5rem] border border-white/5 transition-all duration-700 flex flex-col justify-center bg-black/40", activeTab === 'ideal' ? "hidden md:flex" : "flex")}>
+          <div className="text-neutral-300 md:text-neutral-800 md:group-hover:text-neutral-200 transition-colors duration-[800ms] ease-out">
+            <h3 className="font-black text-xs uppercase tracking-[0.4em] mb-8 md:mb-10 flex items-center gap-3 italic text-neutral-400 md:text-[inherit]">
+              <AlertCircle size={16} />
+              No es para:
+            </h3>
+            <ul className="space-y-6">
+              {noEsPara.map((text, i) => (
+                <li key={i} className="flex gap-4 italic font-medium">
+                  <ChevronRight size={14} className="mt-1 shrink-0 text-neutral-600 md:text-[inherit] md:opacity-50 md:group-hover:opacity-100 transition-opacity duration-[800ms]" />
+                  <span className="text-[13px] md:text-sm">{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 // ── Hero title — animated letter by letter ────────────────────────────
 const HERO_TITLE = "Respondés mensajes, subís contenido… y aún así no escala. No es casualidad.";
@@ -49,40 +172,40 @@ function AnimatedTitle() {
 
 // ── Data ──────────────────────────────────────────────────────────────
 const problems = [
-  { t: 'No sabés por qué perdés clientes',          d: 'Sin datos del recorrido del cliente, cada abandono es un misterio sin respuesta.' },
-  { t: 'Tu inventario está desordenado',            d: 'Stock mal registrado significa faltantes inesperados, exceso de mercadería y pérdida de margen.' },
-  { t: 'No tenés forma de mostrar tu catálogo',     d: 'Tus productos existen, pero si no tienen visibilidad clara, no generan ventas.' },
-  { t: 'Depende todo de tu memoria',                d: 'Turnos, deudas, stock: cuando el negocio vive en tu cabeza, el límite de crecimiento sos vos.' },
-  { t: 'Tus mensajes y publicaciones no venden',    d: 'Sin copy estructurado ni automatización, el esfuerzo en contenido no convierte en clientes.' },
-  { t: 'No contestás rápido a consultas',           d: 'Un lead que espera más de 5 minutos tiene 10 veces menos probabilidades de cerrar.' },
-  { t: 'Cobros demorados o pagos perdidos',         d: 'Facturación manual y seguimiento informal hacen que el dinero se escape entre los dedos.' },
-  { t: 'No sabés qué producto vende más',           d: 'Sin análisis de rendimiento, tomás decisiones de compra y stock a ciegas.' },
-  { t: 'Perdés horas haciendo siempre lo mismo',    d: 'Tareas repetitivas que podrían automatizarse consumen tiempo que deberías dedicar a crecer.' },
-  { t: 'Datos de clientes en cualquier lado',       d: 'WhatsApp, papel, planilla y memoria: un CRM disperso que no sirve cuando más lo necesitás.' },
-  { t: 'Tu página de ventas no convierte',          d: 'Visitas que llegan y se van. El diseño y el copy de tu página no están optimizados para vender.' },
-  { t: 'Tus clientes no tienen buena experiencia',  d: 'Procesos lentos, respuestas tardías y falta de seguimiento alejan clientes que podrías retener.' },
-  { t: 'No sabés cuánto vas a vender',              d: 'Sin proyección financiera, no podés planificar, invertir ni escalar con confianza.' },
+  { t: 'No sabés por qué perdés clientes', d: 'Sin datos del recorrido del cliente, cada abandono es un misterio sin respuesta.' },
+  { t: 'Tu inventario está desordenado', d: 'Stock mal registrado significa faltantes inesperados, exceso de mercadería y pérdida de margen.' },
+  { t: 'No tenés forma de mostrar tu catálogo', d: 'Tus productos existen, pero si no tienen visibilidad clara, no generan ventas.' },
+  { t: 'Depende todo de tu memoria', d: 'Turnos, deudas, stock: cuando el negocio vive en tu cabeza, el límite de crecimiento sos vos.' },
+  { t: 'Tus mensajes y publicaciones no venden', d: 'Sin copy estructurado ni automatización, el esfuerzo en contenido no convierte en clientes.' },
+  { t: 'No contestás rápido a consultas', d: 'Un lead que espera más de 5 minutos tiene 10 veces menos probabilidades de cerrar.' },
+  { t: 'Cobros demorados o pagos perdidos', d: 'Facturación manual y seguimiento informal hacen que el dinero se escape entre los dedos.' },
+  { t: 'No sabés qué producto vende más', d: 'Sin análisis de rendimiento, tomás decisiones de compra y stock a ciegas.' },
+  { t: 'Perdés horas haciendo siempre lo mismo', d: 'Tareas repetitivas que podrían automatizarse consumen tiempo que deberías dedicar a crecer.' },
+  { t: 'Datos de clientes en cualquier lado', d: 'WhatsApp, papel, planilla y memoria: un CRM disperso que no sirve cuando más lo necesitás.' },
+  { t: 'Tu página de ventas no convierte', d: 'Visitas que llegan y se van. El diseño y el copy de tu página no están optimizados para vender.' },
+  { t: 'Tus clientes no tienen buena experiencia', d: 'Procesos lentos, respuestas tardías y falta de seguimiento alejan clientes que podrías retener.' },
+  { t: 'No sabés cuánto vas a vender', d: 'Sin proyección financiera, no podés planificar, invertir ni escalar con confianza.' },
 ];
 
 const solutions = [
-  { icon: Search,        t: 'Diagnóstico del recorrido del cliente',    d: 'Identificamos dónde se pierden clientes y cómo retenerlos.' },
-  { icon: Package,       t: 'Organización de inventario',               d: 'Controlás tu stock en tiempo real y evitás faltantes o exceso.' },
-  { icon: Globe,         t: 'Catálogo digital',                         d: 'Mostrá tus productos de forma clara y accesible para todos.' },
-  { icon: Database,      t: 'Centralización de procesos',               d: 'Todo en un solo lugar, para que el negocio funcione sin depender solo de vos.' },
-  { icon: MessageSquare, t: 'Optimización de mensajes y contenido',     d: 'Mejoramos textos y publicaciones para generar más ventas.' },
-  { icon: Zap,           t: 'Respuestas rápidas y seguimiento de leads', d: 'CRM y automatización para que ningún cliente se enfríe.' },
-  { icon: DollarSign,    t: 'Automatización de cobros',                 d: 'Facturación y pagos controlados automáticamente para no perder dinero.' },
-  { icon: BarChart3,     t: 'Análisis de productos más vendidos',       d: 'Dashboards que muestran qué funciona y qué no, para tomar decisiones claras.' },
-  { icon: Clock,         t: 'Automatización de tareas repetitivas',     d: 'El software hace lo que siempre repetís, liberando tu tiempo para crecer.' },
-  { icon: Brain,         t: 'Centralización de datos de clientes',      d: 'Toda la información de clientes en un solo lugar, fácil de acceder.' },
-  { icon: List,          t: 'Optimización de tu página de ventas',      d: 'Diseño, copy y estructura para convertir más visitas en clientes.' },
-  { icon: Shield,        t: 'Mejora de la experiencia del cliente',     d: 'Procesos y herramientas que facilitan la interacción y aumentan la satisfacción.' },
-  { icon: TrendingUp,    t: 'Predicción de ingresos',                   d: 'Dashboards financieros que muestran cómo va tu negocio y qué esperar.' },
+  { icon: Search, t: 'Diagnóstico del recorrido del cliente', d: 'Identificamos dónde se pierden clientes y cómo retenerlos.' },
+  { icon: Package, t: 'Organización de inventario', d: 'Controlás tu stock en tiempo real y evitás faltantes o exceso.' },
+  { icon: Globe, t: 'Catálogo digital', d: 'Mostrá tus productos de forma clara y accesible para todos.' },
+  { icon: Database, t: 'Centralización de procesos', d: 'Todo en un solo lugar, para que el negocio funcione sin depender solo de vos.' },
+  { icon: MessageSquare, t: 'Optimización de mensajes y contenido', d: 'Mejoramos textos y publicaciones para generar más ventas.' },
+  { icon: Zap, t: 'Respuestas rápidas y seguimiento de leads', d: 'CRM y automatización para que ningún cliente se enfríe.' },
+  { icon: DollarSign, t: 'Automatización de cobros', d: 'Facturación y pagos controlados automáticamente para no perder dinero.' },
+  { icon: BarChart3, t: 'Análisis de productos más vendidos', d: 'Dashboards que muestran qué funciona y qué no, para tomar decisiones claras.' },
+  { icon: Clock, t: 'Automatización de tareas repetitivas', d: 'El software hace lo que siempre repetís, liberando tu tiempo para crecer.' },
+  { icon: Brain, t: 'Centralización de datos de clientes', d: 'Toda la información de clientes en un solo lugar, fácil de acceder.' },
+  { icon: List, t: 'Optimización de tu página de ventas', d: 'Diseño, copy y estructura para convertir más visitas en clientes.' },
+  { icon: Shield, t: 'Mejora de la experiencia del cliente', d: 'Procesos y herramientas que facilitan la interacción y aumentan la satisfacción.' },
+  { icon: TrendingUp, t: 'Predicción de ingresos', d: 'Dashboards financieros que muestran cómo va tu negocio y qué esperar.' },
 ];
 
 const idealPara = [
   'Dueños de pymes o emprendimientos que quieren que su negocio crezca sin depender solo de ellos.',
-  'Profesionales que quieren mejorar sus ventas, procesos y presencia digital.',
+  'Profesionales independientes que quieren mejorar sus ventas, procesos y presencia digital.',
   'Negocios que buscan automatizar tareas repetitivas y organizar datos, inventario y leads.',
   'Quienes quieren que su comunicación y página de ventas realmente conviertan.',
 ];
@@ -98,25 +221,28 @@ const noEsPara = [
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const badgeRef     = useRef<HTMLDivElement>(null);
-  const subtitleRef  = useRef<HTMLParagraphElement>(null);
-  const ctaRef       = useRef<HTMLDivElement>(null);
-  const scrollRef    = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     // ── Badge + subtítulo + botones — entrada con GSAP ────────────────
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.8 });
-    tl.from(badgeRef.current,    { autoAlpha: 0, y: -16, duration: 0.55 })
+    tl.from(badgeRef.current, { autoAlpha: 0, y: -16, duration: 0.55 })
       .from(subtitleRef.current, { autoAlpha: 0, x: -28, duration: 0.70 }, '-=0.20')
       .from(Array.from(ctaRef.current!.children), {
         autoAlpha: 0, y: 18, stagger: 0.14, duration: 0.55,
       }, '-=0.35')
       .from(scrollRef.current, { autoAlpha: 0, duration: 0.45 }, '-=0.20');
 
+    // ── Pre-hide elements to prevent flashes and fix load state ──
+    gsap.set('.problem-card, .solution-card', { autoAlpha: 0, y: 34 });
+
     // ── Problem cards — scroll batch ──────────────────────────────────
     ScrollTrigger.batch('.problem-card', {
-      onEnter: batch => gsap.from(batch, {
-        autoAlpha: 0, y: 34, stagger: 0.07, duration: 0.65,
+      onEnter: batch => gsap.to(batch, {
+        autoAlpha: 1, y: 0, stagger: 0.07, duration: 0.65,
         ease: 'power2.out', overwrite: true,
       }),
       start: 'top 88%',
@@ -125,8 +251,8 @@ export default function Home() {
 
     // ── Solution cards — scroll batch ─────────────────────────────────
     ScrollTrigger.batch('.solution-card', {
-      onEnter: batch => gsap.from(batch, {
-        autoAlpha: 0, y: 34, stagger: 0.07, duration: 0.65,
+      onEnter: batch => gsap.to(batch, {
+        autoAlpha: 1, y: 0, stagger: 0.07, duration: 0.65,
         ease: 'power2.out', overwrite: true,
       }),
       start: 'top 88%',
@@ -223,28 +349,19 @@ export default function Home() {
         {/* Preámbulo */}
         <div className="mb-14 max-w-3xl">
           <h2 className="text-2xl font-black text-white uppercase tracking-tighter mb-6 border-l-4 border-violet-600 pl-6 italic">
-            Problemas que eliminamos
-          </h2>
-          <p className="pl-6 border-l-2 border-white/5 text-neutral-400 text-sm italic font-medium leading-relaxed">
             Si tenés uno o más de estos problemas, aunque no lo veas, estás perdiendo más ventas de las que pensás.
-          </p>
+          </h2>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {problems.map((item, i) => (
-            <div
+            <FeatureCard
               key={i}
-              className={`problem-card p-6 bg-neutral-950/60 border border-white/5 rounded-2xl hover:bg-violet-950/[0.12] hover:border-violet-500/20 transition-all duration-300 group relative overflow-hidden${i === problems.length - 1 ? ' col-span-2 lg:col-span-2 lg:col-start-2' : ''}`}
-            >
-              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-violet-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top rounded-full" />
-              <AlertCircle className="text-violet-900 group-hover:text-violet-400 mb-3 transition-colors duration-300" size={16} />
-              <h4 className="text-white font-bold mb-2 text-sm tracking-tight group-hover:text-violet-200 group-hover:translate-x-1.5 transition-all duration-300">
-                {item.t}
-              </h4>
-              <p className="text-neutral-600 text-xs leading-relaxed group-hover:text-neutral-400 transition-colors duration-300 italic">
-                {item.d}
-              </p>
-            </div>
+              Icon={AlertCircle}
+              title={item.t}
+              description={item.d}
+              className={i === problems.length - 1 ? ' md:col-span-2 lg:col-span-2 lg:col-start-2' : ''}
+            />
           ))}
         </div>
       </section>
@@ -263,87 +380,16 @@ export default function Home() {
         </div>
 
         <div className="border border-violet-500/10 rounded-3xl overflow-hidden divide-y divide-violet-500/5">
-          {solutions.map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={i}
-                className="solution-card group px-8 py-5 flex items-start gap-5 hover:bg-violet-950/[0.12] transition-all duration-300 cursor-default relative"
-              >
-                {/* Left accent line on hover */}
-                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-violet-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
-
-                {/* Icon */}
-                <Icon
-                  className="text-violet-800 group-hover:text-violet-400 transition-colors duration-300 mt-0.5 shrink-0"
-                  size={16}
-                />
-
-                {/* Title + expandable description */}
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-neutral-200 font-bold text-sm tracking-tight group-hover:text-violet-200 transition-colors duration-300">
-                    {item.t}
-                  </h4>
-                  <div className="max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-300 ease-in-out">
-                    <p className="text-neutral-600 text-xs leading-relaxed italic pt-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100">
-                      {item.d}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Checkmark */}
-                <CheckCircle2
-                  className="text-violet-900/40 group-hover:text-violet-500/70 transition-colors duration-300 mt-0.5 shrink-0"
-                  size={14}
-                />
-              </div>
-            );
-          })}
+          {solutions.map((item, i) => (
+            <SolutionCard key={i} item={item} />
+          ))}
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════
            IDEAL PARA / NO ES PARA
           ══════════════════════════════════════════════ */}
-      <section className="py-24 px-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start border-b border-white/5 pb-32 relative z-10">
-
-        {/* ── IDEAL PARA ── */}
-        <div className="ideal-col bg-neutral-900/50 p-12 rounded-[2.5rem] border border-violet-500/20 relative overflow-hidden group shadow-inner shadow-violet-900/10 hover:border-violet-500/40 transition-all duration-700">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-violet-600/8 blur-[100px] -z-10 group-hover:bg-violet-600/14 transition-colors duration-1000 rounded-full" />
-          <h3 className="text-violet-400 font-black text-xs uppercase tracking-[0.4em] mb-10 flex items-center gap-3 italic">
-            <CheckCircle2 size={16} className="text-violet-500" />
-            Ideal para:
-          </h3>
-          <ul className="space-y-6">
-            {idealPara.map((text, i) => (
-              <li key={i} className="flex gap-4 items-start text-neutral-300 group/item cursor-default">
-                <span className="text-violet-500/50 font-black italic text-sm group-hover/item:text-violet-400 transition-colors shrink-0 mt-0.5">
-                  0{i + 1}.
-                </span>
-                <p className="text-sm font-semibold tracking-tight leading-relaxed group-hover/item:text-white group-hover/item:translate-x-1 transition-all duration-200">
-                  {text}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* ── NO ES PARA ── */}
-        <div className="noespara-col p-12 rounded-[2.5rem] border border-white/5 opacity-40 hover:opacity-70 transition-all duration-700 flex flex-col justify-center bg-black/30">
-          <h3 className="text-neutral-600 font-black text-xs uppercase tracking-[0.4em] mb-10 flex items-center gap-3 italic">
-            <AlertCircle size={16} className="text-neutral-700" />
-            No es para:
-          </h3>
-          <ul className="space-y-6">
-            {noEsPara.map((text, i) => (
-              <li key={i} className="flex gap-4 text-neutral-600 italic font-medium">
-                <ChevronRight size={14} className="mt-1 shrink-0 text-neutral-800" />
-                <span className="text-sm">{text}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <IdealSection idealPara={idealPara} noEsPara={noEsPara} />
 
       {/* ══════════════════════════════════════════════
            FOOTER
@@ -354,37 +400,36 @@ export default function Home() {
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-violet-600/6 blur-[160px] rounded-full animate-pulse" />
         <div className="footer-cta relative z-10">
-          <h2 className="text-5xl md:text-[7rem] font-black text-white mb-10 tracking-tighter leading-none italic uppercase">
-            ¿Digitalizamos <br /> tu negocio?
+          <h2 className="text-4xl sm:text-5xl md:text-[7rem] font-black text-white mb-10 tracking-tighter leading-none italic uppercase">
+            ¿Digitalizamos <br className="hidden md:block" /> tu negocio?
           </h2>
           <p className="text-neutral-500 max-w-xl mx-auto mb-16 text-lg font-medium leading-relaxed italic opacity-80 border-b border-white/5 pb-10">
             &ldquo;No vendemos código, vendemos resultados. El software a medida es la frontera entre un negocio que sobrevive y uno que domina.&rdquo;
           </p>
 
           {/* Logo with breathing glow */}
-          <div className="flex flex-col items-center gap-5 mb-16">
+          <div className="flex flex-col items-center gap-5 mb-16 mt-8">
             <div className="relative flex items-center justify-center">
-              <div className="absolute w-32 h-32 bg-violet-600/25 blur-[50px] rounded-full animate-pulse" />
-              <div className="absolute w-20 h-20 bg-violet-500/20 blur-[25px] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+              <div className="absolute w-64 h-64 bg-violet-600/20 blur-[70px] rounded-full animate-pulse" />
+              <div className="absolute w-40 h-40 bg-violet-500/15 blur-[40px] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.png"
                 alt="Obsidian Void"
-                className="relative z-10 w-20 h-20 object-contain drop-shadow-[0_0_24px_rgba(139,92,246,0.7)]"
+                className="relative z-10 w-40 h-40 object-contain drop-shadow-[0_0_32px_rgba(139,92,246,0.6)]"
               />
             </div>
-            <p className="text-neutral-300 font-black italic text-sm tracking-[0.15em] uppercase">
+            <p className="text-neutral-300 font-black italic text-sm tracking-[0.15em] uppercase mt-4">
               Orden en el caos. Poder en tus manos.
             </p>
           </div>
 
-          <a
-            href="mailto:obsidianvoidstudio@gmail.com"
-            className="group relative inline-flex items-center gap-4 bg-white text-black px-12 py-6 rounded-2xl font-black text-lg hover:bg-violet-600 hover:text-white transition-all hover:scale-105 active:scale-95 shadow-2xl overflow-hidden shadow-white/5"
+          <GmailLink
+            className="group relative flex w-full max-w-[280px] md:max-w-none md:inline-flex mx-auto items-center justify-center gap-3 md:gap-4 bg-white text-black px-4 md:px-12 py-5 md:py-6 rounded-2xl font-black text-[12px] md:text-lg hover:bg-violet-600 hover:text-white transition-all hover:scale-105 active:scale-95 shadow-2xl overflow-hidden shadow-white/5"
           >
-            <span className="tracking-tight uppercase italic font-bold">obsidianvoidstudio@gmail.com</span>
+            <span className="tracking-widest md:tracking-tight uppercase italic font-bold shrink-0">obsidianvoidstudio@gmail.com</span>
             <div className="absolute inset-0 bg-white/20 animate-shine -translate-x-full pointer-events-none" />
-          </a>
+          </GmailLink>
           <div className="mt-32 flex flex-col items-center gap-8">
             <div className="text-lg font-black tracking-[0.4em] text-white uppercase italic group cursor-default">
               <span className="group-hover:text-violet-500 transition-colors duration-500">OBSIDIAN</span>
