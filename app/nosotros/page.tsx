@@ -139,10 +139,16 @@ export default function NosotrosPage() {
                 Cada sistema que desarrollamos es una pieza de ingeniería diseñada para durar, escalar y adaptarse al ritmo real del negocio que lo usa.
               </p>
               <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
-                No somos una agencia creativa ni una consultora genérica. Somos ingenieros que construyen sistemas funcionales, auditables y escalables. Priorizamos arquitecturas que devuelvan al dueño la visibilidad total de su negocio: datos reales, en tiempo real, accesibles desde cualquier dispositivo.
+                No somos una agencia creativa ni una consultora genérica. En Obsidian Void nos enfocamos en resolver problemas reales, no en tecnicismos ni etiquetas como CRM o ERP.
               </p>
               <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
-                Cada línea que escribimos tiene propósito. Nuestros entregables están documentados, son mantenibles y transferibles. El negocio no depende de nosotros para seguir funcionando.
+                Construimos sistemas que se adaptan al negocio, diseñados para escalar y acompañar su crecimiento.
+              </p>
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
+                Nuestro trabajo no termina en la entrega: estamos cuando el negocio necesita evolucionar, mejorar o expandirse.
+              </p>
+              <p className="text-neutral-500 text-sm leading-relaxed italic pl-6 border-l-2 border-white/5">
+                Priorizamos arquitecturas que devuelvan al dueño la visibilidad total de su negocio: datos reales, en tiempo real, accesibles desde cualquier dispositivo.
               </p>
             </div>
           </div>
